@@ -1,0 +1,50 @@
+<div class="container">
+    <nav class="navbar  navbar-dark bg-dark">
+        <a class="navbar-brand">Git-Users</a>
+        <form #userForm='ngForm'>
+            <input class="form-control me-2" type="text" placeholder="Search" id="name" [(ngModel)]='user.name'
+                name="name" (ngModelChange)="getUsers()">
+        </form>
+    </nav>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{profile?.avatar_url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Official name: {{profile?.name}}</h5>
+                        <p class="card-text">From:{{profile?.location}}</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" id="name">
+                <h1>Username:{{profile?.login}}</h1>
+
+                <h1>Followers:{{profile?.followers}}</h1>
+
+                <h1>Following:{{profile?.following}}</h1>
+
+                <h1>No. of Repos:{{profile?.public_repos}}</h1>
+
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success" (click)='fetchRepos()'>see {{username}}'s Repos</button>
+    <div class="row">
+        <div class="col-md-4" *ngFor='let repo of repos;let i=index'>
+            <div class="card"  id="card">
+                <h5 class="card-header" id="head">{{repos[i].name}}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Created on:{{repos[i].created_at |date| period}}</h5>
+                    <p class="card-text">{{repos[i].description}}</p>
+                    <a href="{{repos[i].html_url}}" class="btn btn-primary">Go to repo</a>
+                </div>
+            </div>
+        </div>
+        <hr><hr>
+    </div>
+    <div ng-mouseover="profile?.followers = profile?.followers + 1" ng-init="profile?.followers=0">Mouse over me!</div>
+
+<h1>{{profile?.followers}}</h1>
+</div>
